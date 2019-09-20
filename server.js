@@ -13,7 +13,16 @@ app.get('/userform', function (req, res) {
 		last_name: req.query.last_name
 	};
 	res.send(JSON.stringify(response));
-})
+});
+
+app.use('/store', function(req, res, next) {
+	console.log('Hey, I\'m a middleware to the store main page');
+	next();
+});
+
+app.get('/store', function(req, res) {
+	res.send('This is the store main page');
+});
 
 var server = app.listen(3000, 'localhost', function() {
 	var host = server.address().address;
